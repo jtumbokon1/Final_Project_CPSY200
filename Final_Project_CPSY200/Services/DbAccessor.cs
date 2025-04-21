@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Intrinsics.X86;
-using Android.Icu.Text;
 using Dapper;
 using Final_Project_CPSY200.Models;
 using Microsoft.Maui.ApplicationModel.Communication;
 using Microsoft.Maui.Controls;
 using MySqlConnector;
-using static Android.Provider.Contacts.Intents;
-using static Android.Util.EventLogTags;
-using static Java.Interop.JniEnvironment;
+
 
 namespace Final_Project_CPSY200.Services
 {
