@@ -1,0 +1,45 @@
+﻿@page "/editequipment/{Equipment_Id}"
+
+<h1>Edit Equipment @equipment.Equipment_Id</h1>
+
+
+<EditForm Model="@equipment">
+    <div class="form-group mb-3">
+        <label for="equipment_Id">Equipment Id</label>
+        <InputText id="equipment_Id" class="form-control" @bind-Value="@equipment.Equipment_Id" />
+	</div>
+
+    <div class="form-group mb-3">
+        <label for="category_Id">Category Id</label>
+        <InputText id="category_Id" class="form-control" @bind-Value="@equipment.Category_Id" />
+	</div>
+
+    <div class="form-group mb-3">
+        <label for="equipment_Name">Name</label>
+        <InputText id="equipment_Name" class="form-control" @bind-Value="@equipment.Equipment_Name" />
+	</div>
+
+    <div class="form-group mb-3">
+        <label for="equipment_Description">Description</label>
+        <InputText id="equipment_Description" class="form-control" @bind-Value="@equipment.Description" />
+	</div>
+
+    <div class="form-group mb-3">
+        <label for="daily_Rate">Daily Rate</label>
+        <InputText id="daily_Rate" class="form-control" @bind-Value="@equipment.Daily_Rate" />
+	</div>
+    
+    <div class="d-flex justify-content-center align-items-center">
+        <nav>
+            <NavLink class="btn btn-secondary me-2" href="/equipmentmanager">Back</NavLink>
+        </nav>
+       <button @onclick="UpdateEquipment" class="btn btn-primary">Update</button>
+    </div>
+</EditForm>
+
+@if (isSaved)
+{
+    <div class="alert alert-info" role="alert">
+		Equipment @equipment.Equipment_Id updated
+    </div>
+}

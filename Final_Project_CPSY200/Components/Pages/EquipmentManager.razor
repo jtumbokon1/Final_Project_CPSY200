@@ -1,0 +1,38 @@
+﻿@page "/equipmentmanager"
+
+<header class="d-flex justify-content-between my-4">
+    <h1>Rental Equipment</h1>
+    <div class="m-x-0">
+        <NavLink class="btn btn-primary" href="addEquipment">Add new equipment</NavLink>
+    </div>
+</header>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Equipment Id</th>
+            <th>Category Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Daily Rate</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var equipment in equipments)
+        {
+            <tr>
+                <td>@equipment.Equipment_Id</td>
+                <td>@equipment.Category_Id</td>
+                <td>@equipment.Equipment_Name</td>
+                <td>@equipment.Description</td>
+                <td>@equipment.Daily_Rate</td>
+                <td class="text-center">
+                    <button class="btn btn-secondary" @onclick="() => EditEquipment(equipment)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeleteEquipment(equipment)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

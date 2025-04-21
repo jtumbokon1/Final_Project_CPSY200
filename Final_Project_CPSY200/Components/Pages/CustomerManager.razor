@@ -1,0 +1,37 @@
+﻿@page "/customermanager"
+
+<header class="d-flex justify-content-between my-4">
+    <h1>Customer Information</h1>
+    <div class="m-x-0">
+        <NavLink class="btn btn-primary" href="addCustomer">Add new customer</NavLink>
+    </div>
+</header>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Customer Id</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Contact Phone</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in customers)
+        {
+            <tr>
+                <td>@customer.Customer_Id</td>
+                <td>@customer.Last_Name</td>
+                <td>@customer.First_Name</td>
+                <td>@customer.Contact_Phone</td>
+                <td>@customer.Email</td>
+                <td class="text-center">
+                    <button class="btn btn-secondary" @onclick="() => EditCustomer(customer)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeleteCustomer(customer)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

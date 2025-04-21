@@ -1,0 +1,28 @@
+﻿@page "/addCategory"
+
+<h1>Add New Category</h1>
+
+<EditForm Model="@category">
+    <div class="form-group mb-3">
+            <label for="category_Id">Category Id</label>
+            <InputText id="category_Id" class="form-control" @bind-Value="@category.Category_Id" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="category_Name">Category Name</label>
+        <InputText id="category_Name" class="form-control" @bind-Value="@category.Category_Name" />
+	</div>
+     
+
+    <div class="d-flex justify-content-center align-items-center">
+        <NavLink class="btn btn-secondary me-2" href="/categorylist">Back</NavLink>
+        <button @onclick="SaveCategory" class="btn btn-primary">Add</button>
+    </div>
+</EditForm>
+
+@if (isSaved)
+{
+        <div class="alert alert-info" role="alert">
+            Category added
+        </div>
+}

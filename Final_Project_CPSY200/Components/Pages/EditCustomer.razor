@@ -1,0 +1,40 @@
+﻿@page "/editcustomer/{Customer_Id}"
+
+<h1>Edit Customer @customer.Customer_Id</h1>
+
+
+<EditForm Model="@customer">
+    <div class="form-group mb-3">
+		<label for="last_Name">Last Name</label>
+		<InputText id="last_Name" class="form-control" @bind-Value="@customer.Last_Name"/>
+    </div>
+
+    <div class="form-group mb-3">
+		<label for="first_Name">First Name</label>
+        <InputText id="first_Name" class="form-control" @bind-Value="@customer.First_Name"/>
+    </div>
+
+    <div class="form-group mb-3">
+		<label for="contact_Phone">Contact Phone</label>
+		<InputText id="contact_Phone" class="form-control" @bind-Value="@customer.Contact_Phone" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="@customer.Email"/>
+	</div>
+
+    <div class="d-flex justify-content-center align-items-center">
+       <nav>
+           <NavLink class="btn btn-secondary me-2" href="/customermanager">Back</NavLink>
+       </nav>
+       <button @onclick="UpdateCustomer" class="btn btn-primary">Update</button>
+    </div>
+</EditForm>
+
+@if (isSaved)
+{
+    <div class="alert alert-info" role="alert">
+        Customer @customer.Customer_Id updated
+    </div>
+}

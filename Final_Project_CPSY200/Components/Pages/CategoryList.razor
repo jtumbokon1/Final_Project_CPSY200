@@ -1,0 +1,31 @@
+﻿@page "/categorylist"
+
+<header class="d-flex justify-content-between my-4">
+    <h1>Category List</h1>
+    <div class="m-x-0">
+        <NavLink class="btn btn-primary" href="addCategory">Add new category</NavLink>
+    </div>
+</header>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Category Id</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in categories)
+        {
+            <tr>
+                <td>@category.Category_Id</td>
+                <td>@category.Category_Name</td>
+                <td class="text-center">
+                    <button class="btn btn-secondary" @onclick="() => EditCategory(category)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeleteCategory(category)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

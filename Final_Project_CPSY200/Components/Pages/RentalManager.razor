@@ -1,0 +1,40 @@
+﻿@page "/rentalmanager"
+
+<header class="d-flex justify-content-between my-4">
+    <h1>Rental Information</h1>
+    <div class="m-x-0">
+        <NavLink class="btn btn-primary" href="addRental">Add new rental</NavLink>
+    </div>
+</header>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Rental Id</th>
+            <th>Date</th>
+            <th>Customer Id </th>
+            <th>Equipment Id </th>
+            <th>Rental Date</th>
+            <th>Return Date</th>
+			<th>Cost</th>
+			<th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in rentals)
+        {
+                <tr>
+                    <td>@rental.Rental_Id</td>
+                    <td>@rental.Date.ToString("M/d/yyyy")</td>
+                    <td>@rental.Customer_Id</td>
+                    <td>@rental.Equipment_Id</td>
+                    <td>@rental.Rental_Date.ToString("M/d/yyyy")</td>
+                    <td>@rental.Return_Date.ToString("M/d/yyyy")</td>
+					<td>@rental.Cost</td>
+                    <td class="text-center">
+                        <button class="btn btn-secondary" @onclick="() => EditRental(rental)">Edit</button>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
