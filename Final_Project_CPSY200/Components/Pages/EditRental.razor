@@ -1,0 +1,49 @@
+﻿@page "/editrental/{Rental_Id:int}"
+
+<h1>Edit Rental @rental.Rental_Id</h1>
+
+<EditForm Model="@rental" OnValidSubmit="UpdateRental">
+    <div class="form-group mb-3">
+        <label for="customer_Id">Customer</label>
+        <InputSelect id="customer_Id" class="form-control" @bind-Value="@rental.Customer_Id">
+            <option value="">-- Select Customer --</option>
+            @foreach (var c in customers)
+            {
+                    <option value="@c.Customer_Id">@c.First_Name @c.Last_Name</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="equipment_Id">Equipment</label>
+        <InputSelect id="equipment_Id" class="form-control" @bind-Value="@rental.Equipment_Id" >
+            <option value="">-- Select Equipment --</option>
+            @foreach (var e in equipments)
+            {
+                    <option value="@e.Equipment_Id">@e.Equipment_Name</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="rental_Date">Rental Date</label>
+        <InputDate id="rental_Date" class="form-control" @bind-Value="@rental.Rental_Date"  />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="return_Date">Return Date</label>
+        <InputDate id="return_Date" class="form-control" @bind-Value="@rental.Return_Date" />
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <NavLink class="btn btn-secondary me-2" href="/rentalmanager">Back</NavLink>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+</EditForm>
+
+@if (isSaved)
+{e
+        <div class="alert alert-info mt-3" role="alert">
+            Rental @rental.Rental_Id updated successfully.
+        </div>
+}
