@@ -1,8 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Intrinsics.X86;
+using Android.Icu.Text;
 using Dapper;
 using Final_Project_CPSY200.Models;
+using Microsoft.Maui.ApplicationModel.Communication;
+using Microsoft.Maui.Controls;
 using MySqlConnector;
+using static Android.Provider.Contacts.Intents;
+using static Android.Util.EventLogTags;
+using static Java.Interop.JniEnvironment;
 
 namespace Final_Project_CPSY200.Services
 {
@@ -362,71 +368,70 @@ namespace Final_Project_CPSY200.Services
         //{
         //    connection.Open();
 
-        //    var sql = @"CREATE DATABASE IF NOT EXISTS village_rental;
-        //            USE village_rental;
+        //     var sql = @"CREATE DATABASE IF NOT EXISTS village_rental;
+                        //USE village_rental;
 
-        //            DROP TABLE IF EXISTS rental;
-        //            DROP TABLE IF EXISTS equipment;
-        //            DROP TABLE IF EXISTS customer;
-        //            DROP TABLE IF EXISTS category;
+                        //DROP TABLE IF EXISTS rental;
+                        //DROP TABLE IF EXISTS equipment;
+                        //DROP TABLE IF EXISTS customer;
+                        //DROP TABLE IF EXISTS category;                      
 
+                        //CREATE TABLE IF NOT EXISTS category(
+                        //    Category_Id INT PRIMARY KEY,
+                        //    Category_Name VARCHAR(50)
+                        //);
 
-        //            CREATE TABLE IF NOT EXISTS category (
-        //                Category_Id INT PRIMARY KEY,
-        //                Category_Name VARCHAR(50)
-        //            );
+                        //CREATE TABLE IF NOT EXISTS equipment(
+                        //    Equipment_Id INT PRIMARY KEY,
+                        //    Category_Id INT,
+                        //    Equipment_Name VARCHAR(50),
+                        //    Description TEXT,
+                        //    Daily_Rate DECIMAL(10, 2),
+                        //    FOREIGN KEY(Category_Id) REFERENCES category(Category_Id) ON DELETE CASCADE
+                        //);
 
-        //            CREATE TABLE IF NOT EXISTS equipment (
-        //                Equipment_Id INT PRIMARY KEY,
-        //                Category_Id INT,
-        //                Equipment_Name VARCHAR(50),
-        //                Description TEXT,
-        //                Daily_Rate DECIMAL(10, 2),
-        //                FOREIGN KEY (Category_Id) REFERENCES category(Category_Id) ON DELETE CASCADE
-        //            );
+                        //CREATE TABLE IF NOT EXISTS customer(
+                        //    Customer_Id INT PRIMARY KEY AUTO_INCREMENT,
+                        //    Last_Name VARCHAR(50),
+                        //    First_Name VARCHAR(50),
+                        //    Contact_Phone VARCHAR(50),
+                        //    Email VARCHAR(50)
+                        //);
 
-        //            CREATE TABLE IF NOT EXISTS customer (
-        //                Customer_Id INT PRIMARY KEY AUTO_INCREMENT,
-        //                Last_Name VARCHAR(50),
-        //                First_Name VARCHAR(50),
-        //                Contact_Phone VARCHAR(50),
-        //                Email VARCHAR(50)
-        //            );
+                        //CREATE TABLE rental(
+                        //    Rental_Id INT PRIMARY KEY AUTO_INCREMENT,
+                        //    Date DATE,
+                        //    Customer_Id INT,
+                        //    Equipment_Id INT,
+                        //    Rental_Date DATE,
+                        //    Return_Date DATE,
+                        //    Cost DECIMAL(10, 2),
+                        //    FOREIGN KEY(Customer_Id) REFERENCES customer(Customer_Id) ON DELETE CASCADE,
+                        //    FOREIGN KEY(Equipment_Id) REFERENCES equipment(Equipment_Id)
+                        //);
 
-        //            CREATE TABLE IF NOT EXISTS rental (
-        //                Rental_Id INT PRIMARY KEY,
-        //                Date DATE,   
-        //                Customer_Id INT,
-        //                Equipment_Id INT,
-        //                Rental_Date DATE,
-        //                Return_Date DATE,
-        //                Cost DECIMAL(10, 2),
-        //                FOREIGN KEY (Customer_Id) REFERENCES customer(Customer_Id) ON DELETE CASCADE,
-        //                FOREIGN KEY (Equipment_Id) REFERENCES equipment(Equipment_Id) ON DELETE CASCADE
-        //            );
+                        //INSERT INTO category(Category_Id, Category_Name) VALUES
+                        //(10, 'Power tools'),
+                        //(20, 'Yard equipment'),
+                        //(30, 'Compressors'),
+                        //(40, 'Generators'),
+                        //(50, 'Air Tools');
+                        
+                        //INSERT INTO equipment(Equipment_Id, Category_Id, Equipment_Name, Description, Daily_Rate) VALUES
+                        //(101, 10, 'Hammer drill', 'Powerful drill for concrete and masonry', 25.99),
+                        //(201, 20, 'Chainsaw', 'Gas-powered chainsaw for cutting wood', 49.99),
+                        //(202, 20, 'Lawn mower', 'Self-propelled lawn mower with mulching function', 19.99),
+                        //(301, 30, 'Small Compressor', '5 Gallon Compressor-Portable', 14.99),
+                        //(501, 50, 'Brad Nailer', 'Brad Nailer. Requires 3/4 to 1 1/2 Brad Nails', 10.99);
 
-        //            INSERT INTO category (Category_Id, Category_Name) VALUES
-        //            (10, 'Power tools'),
-        //            (20, 'Yard equipment'),
-        //            (30, 'Compressors'),
-        //            (40, 'Generators'),
-        //            (50, 'Air Tools');
+                        //INSERT INTO customer(Customer_Id, Last_Name, First_Name, Contact_Phone, Email) VALUES
+                        //(1001, 'Doe', 'John', '(555) 555-1212', 'jd@sample.net'),
+                        //(1002, 'Smith', 'Jane', '(555) 555-3434', 'js@live.com'),
+                        //(1003, 'Lee', 'Michael', '(555) 555-5656', 'ml@sample.net');
 
-        //            INSERT INTO equipment (Equipment_Id, Category_Id, Equipment_Name, Description, Daily_Rate) VALUES
-        //            (101, 10, 'Hammer drill', 'Powerful drill for concrete and masonry', 25.99),
-        //            (201, 20, 'Chainsaw', 'Gas-powered chainsaw for cutting wood', 49.99),
-        //            (202, 20, 'Lawn mower', 'Self-propelled lawn mower with mulching function', 19.99),
-        //            (301, 30, 'Small Compressor', '5 Gallon Compressor-Portable', 14.99),
-        //            (501, 50, 'Brad Nailer', 'Brad Nailer. Requires 3/4 to 1 1/2 Brad Nails', 10.99);
-
-        //            INSERT INTO customer (Customer_Id, Last_Name, First_Name, Contact_Phone, Email) VALUES
-        //            (1001, 'Doe', 'John', '(555) 555-1212', 'jd@sample.net'),
-        //            (1002, 'Smith', 'Jane', '(555) 555-3434', 'js@live.com'),
-        //            (1003, 'Lee', 'Michael', '(555) 555-5656', 'ml@sample.net');
-
-        //            INSERT INTO rental (Rental_Id, Date, Customer_Id, Equipment_Id, Rental_Date, Return_Date, Cost) VALUES  
-        //            (1000, '2024-02-15', 1001, 201, '2024-02-20', '2024-02-23', 149.97),
-        //            (1001, '2024-02-16', 1002, 501, '2024-02-21', '2024-02-25', 43.96);";
+                        //INSERT INTO rental(Rental_Id, Date, Customer_Id, Equipment_Id, Rental_Date, Return_Date, Cost) VALUES
+                        //(1000, '2024-02-15', 1001, 201, '2024-02-20', '2024-02-23', 149.97),
+                        //(1001, '2024-02-16', 1002, 501, '2024-02-21', '2024-02-25', 43.96);";
 
         //    connection.Execute(sql);
         //    connection.Close();
