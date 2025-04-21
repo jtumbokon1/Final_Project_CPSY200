@@ -326,6 +326,14 @@ namespace Final_Project_CPSY200.Services
             connection.Close();
         }
 
+        public void DeleteRental(int rental_Id)
+        {
+            var sql = "DELETE FROM rental WHERE Rental_Id = @Rental_Id";
+            connection.Open();
+            connection.Execute(sql, new { Rental_Id = rental_Id });
+            connection.Close();
+        }
+
         public void AddRental(Rental rental)
         {
             var rateSql = "SELECT Daily_Rate FROM equipment WHERE Equipment_Id = @Equipment_Id";

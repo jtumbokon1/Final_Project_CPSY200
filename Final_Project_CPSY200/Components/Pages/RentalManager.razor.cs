@@ -28,6 +28,12 @@ namespace Final_Project_CPSY200.Components.Pages
             NavigationManager.NavigateTo($"/editrental/{rental.Rental_Id}");
         }
 
+        public void DeleteRental(Rental rental)
+        {
+            dbAccessor.DeleteRental(rental.Rental_Id);
+            rentals = dbAccessor.GetAllRentals();
+        }
+
         public void ViewRental(Rental rental)
         {
             NavigationManager.NavigateTo($"/viewrental/{rental.Rental_Id}");

@@ -17,7 +17,6 @@
             <th>Rental Date</th>
             <th>Return Date</th>
 			<th>Cost</th>
-			<th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -31,9 +30,6 @@
                     <td>@rental.Rental_Date.ToString("M/d/yyyy")</td>
                     <td>@rental.Return_Date.ToString("M/d/yyyy")</td>
 					<td>@rental.Cost</td>
-                    <td class="text-center">
-                        <button class="btn btn-secondary" @onclick="() => EditRental(rental)">Edit</button>
-                    </td>
                 </tr>
         }
     </tbody>
