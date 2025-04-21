@@ -77,8 +77,6 @@ namespace Final_Project_CPSY200.Services
                             FOREIGN KEY (Equipment_Id) REFERENCES equipment(Equipment_Id)
                         );
 
-                        ALTER TABLE rental MODIFY COLUMN Rental_Id INT AUTO_INCREMENT;
-
                         INSERT INTO category (Category_Id, Category_Name) VALUES
                         (10, 'Power tools'),
                         (20, 'Yard equipment'),
